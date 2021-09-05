@@ -8,5 +8,5 @@ class StudentAdapter(
     val mContext: Context
     val resId: Int
     val mList: ArrayList<StudentData>
-) : ArrayAdapter<StudentData>() {
+) : ArrayAdapter<StudentData>(mContext,resId,mList) {
 }
