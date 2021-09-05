@@ -2,11 +2,15 @@ package com.neppplus.listview_20210905
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.neppplus.listview_20210905.adapters.StudentAdapter
 import com.neppplus.listview_20210905.datas.StudentData
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     val mStudentList = ArrayList<StudentData>()
+//    변수만 만들고 대입은 나중에 -> lateinit var
+    lateinit var mAdapter : StudentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         mStudentList.add( StudentData("이진호",1991,"서울시 동대문구") )
         mStudentList.add( StudentData("김다은",1992,"서울시 동대문구") )
         mStudentList.add( StudentData("차수나",1966,"서울시 성북구") )
+
+//      미뤄놨던 mAdapter의 대입
+        mAdapter = StudentAdapter(this,R.layout.student_list_item,mStudentList)
+
+//      리스트뷰의 어댑터로 mAdapter가 역할을 하도록 연결
+        studentListView.adapter = mAdapter
 
     }
 }
