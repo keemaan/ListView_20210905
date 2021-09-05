@@ -42,6 +42,10 @@ class StudentAdapter(
 
         nameTxt.text = data.name
         addressTxt.text = data.address
+//      ageTxt는 출생년도가 아닌 나이가 들어가야함. 현재년도-입력값+1
+        val age = 2021-data.birthYear+1
+        ageTxt.text = "(${age}세)"
+
 
         return row
 
