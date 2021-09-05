@@ -27,7 +27,6 @@ class StudentAdapter(
         }
 //  tempRow는 절대 null일 가능성이 없다. 진짜 row로 옯기기
         val row = tempRow!!
-//
         return row
 
     }
