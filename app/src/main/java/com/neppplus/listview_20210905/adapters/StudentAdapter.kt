@@ -9,6 +9,9 @@ import android.widget.TextView
 import com.neppplus.listview_20210905.R
 import com.neppplus.listview_20210905.datas.StudentData
 import org.w3c.dom.Text
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StudentAdapter(
     val mContext: Context,
@@ -43,7 +46,7 @@ class StudentAdapter(
         nameTxt.text = data.name
         addressTxt.text = data.address
 //      ageTxt는 출생년도가 아닌 나이가 들어가야함. 현재년도-입력값+1
-        val age = 2021-data.birthYear+1
+        val age = Calendar.getInstance().get(Calendar.YEAR)-data.birthYear+1
         ageTxt.text = "(${age}세)"
 
 

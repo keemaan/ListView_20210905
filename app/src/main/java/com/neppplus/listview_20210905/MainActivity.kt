@@ -2,6 +2,8 @@ package com.neppplus.listview_20210905
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.neppplus.listview_20210905.adapters.StudentAdapter
 import com.neppplus.listview_20210905.datas.StudentData
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        임시방편 : 코드에 타이핑, 학생데이터 추가
-
         mStudentList.add( StudentData("조경진",1985,"서울시 동대문구") )
         mStudentList.add( StudentData("김기만",1972,"서울시 성북구") )
         mStudentList.add( StudentData("김민혁",2003,"경기도 이천시") )
@@ -36,6 +37,27 @@ class MainActivity : AppCompatActivity() {
 
 //      리스트뷰의 어댑터로 mAdapter가 역할을 하도록 연결
         studentListView.adapter = mAdapter
+
+//      리스트뷰의 각 줄이 눌렀을 때 이벤트 처리
+        studentListView.setOnItemClickListener { adapterView, view, position, l ->
+
+//      세번째 변수 : position or i => 어느 줄이 눌렸는지 위치를 알려줌
+//            Log.d("리스트뷰 눌린 줄", position.toString())
+
+// 클릭된 사람의 이름을 토스트로.
+//        position을 가지고 클릭된 사람이 누구인지
+            val  clickedStudent = mStudentList[ position ]
+            Toast.makeText(this, clickedStudent.name, Toast.LENGTH_SHORT).show()
+        }
+//      리스트뷰의 아이템이 길게 눌렀을 때
+        studentListView.setOnItemLongClickListener { adapterView, view, position, l ->
+//      ~~가 길게 눌림. 토스트 출력
+            val clickedStudent = mStudentList[ position ]
+            Toast.makeText(this, "${clickedStudent.name}이(가) 길게 눌림", Toast.LENGTH_SHORT).show()
+
+//      마지막에 true/false 하나 지정 필요
+            return@setOnItemLongClickListener true
+        }
 
     }
 }
