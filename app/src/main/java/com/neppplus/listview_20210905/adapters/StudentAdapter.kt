@@ -25,6 +25,10 @@ class StudentAdapter(
         if (tempRow == null) {
             tempRow = mInflater.inflate(R.layout.student_list_item,null)
         }
+//  tempRow는 절대 null일 가능성이 없다. 진짜 row로 옯기기
+        val row = tempRow!!
+//
+        return row
 
     }
 }
