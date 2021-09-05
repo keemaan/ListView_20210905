@@ -1,9 +1,11 @@
 package com.neppplus.listview_20210905
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.neppplus.listview_20210905.adapters.StudentAdapter
 import com.neppplus.listview_20210905.datas.StudentData
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,19 +46,27 @@ class MainActivity : AppCompatActivity() {
 //      세번째 변수 : position or i => 어느 줄이 눌렸는지 위치를 알려줌
 //            Log.d("리스트뷰 눌린 줄", position.toString())
 
-// 클릭된 사람의 이름을 토스트로.
-//        position을 가지고 클릭된 사람이 누구인지
+//      클릭된 사람의 이름을 토스트로.
+//      position을 가지고 클릭된 사람이 누구인지
             val  clickedStudent = mStudentList[ position ]
             Toast.makeText(this, clickedStudent.name, Toast.LENGTH_SHORT).show()
         }
 //      리스트뷰의 아이템이 길게 눌렀을 때
         studentListView.setOnItemLongClickListener { adapterView, view, position, l ->
             val clickedStudent = mStudentList[ position ]
+
 //      ~~가 길게 눌린 학생 목록(mStudentList)에서 제거
-            mStudentList.remove(clickedStudent)
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("학생삭제확인")
+            alert.setMessage("${clickedStudent.name}학생을 삭제 하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                mStudentList.remove(clickedStudent)
+            })
+            alert.setNegativeButton("취소",null)
+            alert.show()
+
 //      리스트뷰의 어댑터에 변경사항 확인 공지
             mAdapter.notifyDataSetChanged()
-
             return@setOnItemLongClickListener true
         }
 
